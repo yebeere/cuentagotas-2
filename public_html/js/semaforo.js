@@ -125,12 +125,12 @@ function parserHistorico(contenido) {
     numerofila = filas.length - 2
     ultima = parserHistoricolinea(filas, numerofila)
     fecha=ultima[0];
-    dia=parseInt(fecha.substr(0, 2));
-    mes=parseInt(fecha.substr(3, 2));
-    anio=parseInt(fecha.substr(6, 2));
+    dia=parseInt(fecha.substr(0, 2),10);
+    mes=parseInt(fecha.substr(3, 2),10);
+    anio=parseInt(fecha.substr(6, 2),10);
     hora=ultima[1];
-    ho=parseInt(hora.substr(0, 2));
-    mi=parseInt(hora.substr(3, 2));
+    ho=parseInt(hora.substr(0, 2),10);
+    mi=parseInt(hora.substr(3, 2),10);
     temperatura = parseFloat(ultima[2]);
     humedad = parseFloat(ultima[5]);
     viento = parseFloat(ultima[10]);
