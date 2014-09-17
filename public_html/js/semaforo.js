@@ -12,7 +12,8 @@ var hora;
 var dia;
 var mes;
 var anio;
-        
+var ho;
+var mi;
 
 
 
@@ -66,17 +67,18 @@ function buscardatosHistoricos(ema) {
     //http://anterior.inta.gov.ar/altovalle/met/downld02.txt
     //parserHistorico(llamar('http://anterior.inta.gov.ar/altovalle/met/downld02.txt'));
     parserHistorico(llamar(ema));
-    comparaFecha(dia,mes,anio);
+    comparaFecha(dia,mes,anio,ho,mi);
     
 
     return true;
 }
 
-function comparaFecha(dd,mm,aa){
+function comparaFecha(dd,mm,aa,hh,min){
     var fechaActual = new Date(); 
-    var fechaFin = mm + "/" + dd + "/" + aa +" "+hora;
-    var diferencia=fechaActual-Date.parse(fechaFin);
-    var texto="FA:"+fechaActual+'\nFF:'+Date.parse(fechaFin)+'\nDif:'+diferencia;
+    var fechaFin = new Date(2000+anio,mm,dd,hh,min);
+   // var fechaFin = mm + "/" + dd + "/" + aa;
+    var diferencia=fechaActual-fechaFin;
+    var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+diferencia;
     alert (texto);
     if(diferencia<3){ 
                   return true; 
@@ -131,6 +133,8 @@ function parserHistorico(contenido) {
     mes=ultima[0].substring(3, 2);
     anio=ultima[0].substring(6, 2);
     hora=ultima[1];
+    ho=ultima[1].substring(0, 2);
+    mi=ultima[1].substring(3, 2);
     temperatura = parseFloat(ultima[2]);
     humedad = parseFloat(ultima[5]);
     viento = parseFloat(ultima[10]);
