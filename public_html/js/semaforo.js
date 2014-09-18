@@ -76,7 +76,7 @@ function buscardatosHistoricos(ema) {
 function comparaFecha(dd,mm,aa,hh,min){
     var fechaActual = new Date(); 
     aa=aa+2000;
-    alert(aa+'/'+mm+'/'+dd+'  '+hh+':'+min);
+    alert(aa+'/'+mm-1+'/'+dd+'  '+hh+':'+min);
     var fechaFin = new Date(aa,mm-1,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
     var diferencia=fechaActual-fechaFin;
