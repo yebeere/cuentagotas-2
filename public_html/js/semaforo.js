@@ -81,8 +81,9 @@ function comparaFecha(dd,mm,aa,hh,min){
     alert(aa+'/'+mm+'/'+dd+'  '+hh+':'+min);
     var fechaFin = new Date(aa,mm-1,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
-    var diferencia=fechaActual-fechaFin;
-    var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+diferencia;
+    var diferencia= fechaActual.getTime() - fechaFin.getTime();
+    var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )) 
+    var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
     alert (texto);
     if(diferencia<3){ 
                   return true; 
