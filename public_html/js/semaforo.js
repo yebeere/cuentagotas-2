@@ -78,7 +78,6 @@ function comparaFecha(dd,mm,aa,hh,min){
     var diferencia=new Date();
     aa=aa+2000;
     mm=mm-1;
-    alert(aa+'/'+mm+1+'/'+dd+'  '+hh+':'+min);
     var fechaFin = new Date(aa,mm,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
     var diferencia= fechaActual.getTime() - fechaFin.getTime();
@@ -86,8 +85,8 @@ function comparaFecha(dd,mm,aa,hh,min){
     var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
     alert (texto);
     if(difHoras<3){ 
-                  return true; 
                   alert("paso >3");
+                  return true;                 
          } else { alert("La EMA esta Fuera de Servicio");
                  return false;}
       }
