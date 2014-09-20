@@ -79,7 +79,7 @@ function comparaFecha(dd,mm,aa,hh,min){
     aa=aa+2000;
     mm=mm-1;
     alert(aa+'/'+mm+'/'+dd+'  '+hh+':'+min);
-    var fechaFin = new Date(aa,mm-1,dd,hh,min);
+    var fechaFin = new Date(aa,mm,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
     var diferencia= fechaActual.getTime() - fechaFin.getTime();
     var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )) 
