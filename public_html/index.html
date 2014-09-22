@@ -106,7 +106,7 @@
                             <label class="select ui-select" for="select-choice-a">Seleccione Estación:</label>
                             <div class="ui-select">
 
-                            <select id="select-choice-a" data-native-menu="false" name="select-choice-a" tabindex="-1">
+                            <select id="select-choice-a" data-native-menu="false" name="select-choice-a" tabindex="-1" data-mini="true">
                            <option>Estaciones Meteorológicas</option> 
                        <!-- <option value="1">Estación 1</option> -->
                             </select>
@@ -127,7 +127,7 @@
                             <label class="select ui-select" for="epoca">Estado del Cultivo:</label>
                             <div class="ui-select">
 
-                            <select id="epoca" data-native-menu="false" name="epoca" tabindex="-1">
+                            <select id="epoca" data-native-menu="false" name="epoca" tabindex="-1" data-mini="true">
                          <!--  <option>Estaciones Meteorológicas</option> -->
                              <option value="0">Comienzo de temporada</option>
                              <option value="1">Mediados de temporada</option>
@@ -136,36 +136,22 @@
                             </select>
                             </div>
                     </div>  
-                    <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="PC">Porcentaje de cobertura:</label>
-                            <div class="ui-select">
+                    <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                            <label for="cobertura">Porcentaje de cobertura:</label>
+                            <input type="range" name="cobertura" id="cobertura" value="50" min="0" max="100" step=10 data-highlight="true"  />
+                    </div>
+                        
+                    <div data-role="fieldcontain"class="ui-field-contain ui-body ui-br">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Tipo de Riego:</legend>
 
-                            <select id="PC" data-native-menu="false" name="PC" tabindex="-1">
-                         <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="0">10 %</option>
-                             <option value="1">20 %</option>
-                             <option value="2">30 %</option>
-                             <option value="3">40 %</option>
-                             <option value="4">50 %</option>
-                             <option value="5">60 %</option>
-                             <option value="6">70 %</option>
-                             <option value="7">80 %</option>
-                             <option value="8">90 %</option>
-                             <option value="9">100 %</option>
-                            </select>
-                            </div>
+                                    <input type="radio" name="tipoRiego" id="goteo" value="0.9" checked="checked" />
+                                    <label for="goteo">Riego por goteo</label>
+                                    <input type="radio" name="tipoRiego" id="micro" value="0.8" />
+                                    <label for="micro">Riego por Microaspersión</label>                                    
+                        </fieldset>
                     </div> 
-                    <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="riego">Eficiencia de aplicación:</label>
-                            <div class="ui-select">
-
-                            <select id="riego" data-native-menu="false" name="riego" tabindex="-1">
-                         <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="0.9">Riego por goteo</option>
-                             <option value="0.8">Riego por Microaspersión</option>
-                            </select>
-                            </div>
-                    </div>                      <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
+                      <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
                   </form>
                     <div id="resul"></div>
                     <div id="menu">
