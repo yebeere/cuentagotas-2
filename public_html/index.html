@@ -5,7 +5,10 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
-
+        
+        <link rel="stylesheet" href="themes/Bootstrap.css">
+        <link href="libs/jQueryMobile/jquery.mobile.structure-1.4.4.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
         <link href="css/jqm1.css" rel="stylesheet" type="text/css"/>
         <link href="libs/jQM-flat/jquery.mobile.flatui.css" rel="stylesheet" type="text/css">
         <link href="css/sistemas.css" rel="stylesheet" type="text/css"/>
@@ -109,58 +112,57 @@
                             </select>
                             </div>
                     </div>
-                     <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="select-choice-a">Seleccione Cultivo:</label>
-                            <div class="ui-select">
-
-                            <select id="select-choice-b" data-native-menu="false" name="select-choice-b" tabindex="-1">
-                         <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="1">Manzano</option>
-                             <option value="2">Peral</option>
-                             <option value="3">Frutas de Carozo</option>
-                            </select>
-                            </div>
-                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Tipo de Cultivo:</legend>
+                                    <input type="radio" name="frutal" id="radio-choice-c" value="0" checked="checked" />
+                                    <label for="radio-choice-c">Manzano</label>
+                                    <input type="radio" name="frutal" id="radio-choice-d" value="1" />
+                                    <label for="radio-choice-d">Peral</label>
+                                    <input type="radio" name="frutal" id="radio-choice-b" value="2" />
+                                    <label for="radio-choice-b">Frutas de Carozo</label>
+                        </fieldset>
+                    </div> 
                     <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="select-choice-a">Estado del Cultivo:</label>
+                            <label class="select ui-select" for="epoca">Estado del Cultivo:</label>
                             <div class="ui-select">
 
-                            <select id="select-choice-c" data-native-menu="false" name="select-choice-c" tabindex="-1">
+                            <select id="epoca" data-native-menu="false" name="epoca" tabindex="-1">
                          <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="1">Comienzo de temporada</option>
-                             <option value="2">Mediados de temporada</option>
-                             <option value="3">Cerca de la cosecha</option>
-                             <option value="4">Después de la cosecha</option>
+                             <option value="0">Comienzo de temporada</option>
+                             <option value="1">Mediados de temporada</option>
+                             <option value="2">Cerca de la cosecha</option>
+                             <option value="3">Después de la cosecha</option>
                             </select>
                             </div>
                     </div>  
                     <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="select-choice-a">Porcentaje de cobertura:</label>
+                            <label class="select ui-select" for="PC">Porcentaje de cobertura:</label>
                             <div class="ui-select">
 
-                            <select id="select-choice-d" data-native-menu="false" name="select-choice-d" tabindex="-1">
+                            <select id="PC" data-native-menu="false" name="PC" tabindex="-1">
                          <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="1">10 %</option>
-                             <option value="2">20 %</option>
-                             <option value="3">30 %</option>
-                             <option value="4">40 %</option>
-                             <option value="5">50 %</option>
-                             <option value="6">60 %</option>
-                             <option value="7">70 %</option>
-                             <option value="8">80 %</option>
-                             <option value="9">90 %</option>
-                             <option value="10">100 %</option>
+                             <option value="0">10 %</option>
+                             <option value="1">20 %</option>
+                             <option value="2">30 %</option>
+                             <option value="3">40 %</option>
+                             <option value="4">50 %</option>
+                             <option value="5">60 %</option>
+                             <option value="6">70 %</option>
+                             <option value="7">80 %</option>
+                             <option value="8">90 %</option>
+                             <option value="9">100 %</option>
                             </select>
                             </div>
                     </div> 
                     <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                            <label class="select ui-select" for="select-choice-a">Eficiencia de aplicación:</label>
+                            <label class="select ui-select" for="riego">Eficiencia de aplicación:</label>
                             <div class="ui-select">
 
-                            <select id="select-choice-e" data-native-menu="false" name="select-choice-e" tabindex="-1">
+                            <select id="riego" data-native-menu="false" name="riego" tabindex="-1">
                          <!--  <option>Estaciones Meteorológicas</option> -->
-                             <option value="1">Riego por goteo</option>
-                             <option value="2">Riego por Microaspersión</option>
+                             <option value="0.9">Riego por goteo</option>
+                             <option value="0.8">Riego por Microaspersión</option>
                             </select>
                             </div>
                     </div>                      <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
@@ -200,7 +202,7 @@
            
         </div>
 
-
+S
  
     </body>
 </html>
