@@ -81,7 +81,7 @@ function comparaFecha(dd,mm,aa,hh,min){
     var fechaFin = new Date(aa,mm,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
     var diferencia= fechaActual.getTime() - fechaFin.getTime();
-    var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )) 
+    var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )); 
     var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
     alert (texto);
     if(difHoras<3){ 
@@ -109,7 +109,7 @@ function parserHistoricolinea(filas, numero) {
     ultima = new Array();
     for (i = 0; i < ultimaconblancos.length; i++) {
         //console.log(ultimaconblancos[i]);
-        if (ultimaconblancos[i] != '') {
+        if (ultimaconblancos[i] !=='') {
 
             ultima.push(ultimaconblancos[i]);
         }
