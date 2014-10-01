@@ -5,17 +5,21 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
-        <link href="css/jqm1.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet"  href="libs/jQM-flat/jquery.mobile.flatui.css">
+		<link rel="stylesheet" href="themes/Bootstrap.css">
+                <link href="libs/jQueryMobile/jquery.mobile.structure-1.4.4.min.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+                <script src="libs/jquery-2.0.3.min.js" type="text/javascript"></script>
+                <script src="libs/jQueryMobile/jquery.mobile-1.4.4.min.js" type="text/javascript"></script>
+        
+        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script> 
         <link href="css/sistemas.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.mobile-1.4.3.min.js" type="text/javascript"></script>
-        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
         <script src="js/semaforo.js" type="text/javascript"></script>
         <script src="js/geo.js" type="text/javascript"></script>
         <script type="text/javascript">
                 document.addEventListener("deviceready", onDeviceReady, false);
                 function onDeviceReady() {
                    // Register the event listener
+                   window.plugins.insomnia.keepAwake();
                    document.addEventListener("offline", isOffline(), false);
                    document.addEventListener("online", isOnline(), false);
                    //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
@@ -30,7 +34,7 @@
                function isOnline() {
                    //    alert ('Su dispositivo móvil esta en línea');
                        document.getElementById('net').className = 'estado ok';
-                       var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
+                       var options = {maximumAge: 3000, timeout: 10000, enableHighAccuracy:true};
                        navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS, options);
                       // buscardatosHistoricos();
                    }
@@ -39,13 +43,44 @@
                }    
         </script>
         <script>
-              function seleccion(){
+         function seleccion(){
                 var e = document.getElementById("select-choice-a");
-                var strUser = e.options[e.selectedIndex].value;
-                if (strUser=='Estaciones Meteorológicas') {strUser=0;}
-                document.getElementById('resultados').innerHTML ="<br />EMA:"+ema[strUser][0];
-                buscardatosHistoricos(ema[strUser][4]);
+                var emaSeleccionada = e.options[e.selectedIndex].value;
+                var tipoCultivo=getRadioValue('frutal');
+                var tipoRiego=getRadioValue('tipoRiego');
+                var epoca = document.getElementById("epoca").options[document.getElementById("epoca").selectedIndex].value;
+                var PC=document.getElementById("cobertura").value;
+                
+                if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
+                document.getElementById('estacionAuto').innerHTML = ema[emaSeleccionada][0];
+                document.getElementById('tipoFrutal').innerHTML = culti[tipoCultivo];
+                document.getElementById('estadoCultivo').innerHTML =  epoc[epoca];
+                document.getElementById('porcentajeCob').innerHTML =kr[PC] ; 
+                document.getElementById('tipoRiego').innerHTML = triego[tipoRiego];
+                buscardatosHistoricos(ema[emaSeleccionada][4]);
+                
             }
+          function verDatosEMA(){
+                var e = document.getElementById("select-choice-a");
+                var emaSeleccionada = e.options[e.selectedIndex].value;
+                if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
+                buscardatosHistoricos(ema[emaSeleccionada][4]);
+                publicarDatosEMA(emaSeleccionada);
+          }  
+            function getRadioValue(groupName) {
+                var _result;
+                try {
+                    var o_radio_group = document.getElementsByName(groupName);
+                    for (var a = 0; a < o_radio_group.length; a++) {
+                        if (o_radio_group[a].checked) {
+                            _result = o_radio_group[a].value;
+                            break;
+                        }
+                    }
+                } catch (e) { }
+                return _result;
+            }
+            
         </script>
         
         <title>CuentaGOTAS</title>
@@ -91,53 +126,122 @@
                             <label class="select ui-select" for="select-choice-a">Seleccione Estación:</label>
                             <div class="ui-select">
 
-                            <select id="select-choice-a" data-native-menu="false" name="select-choice-a" tabindex="-1">
+                            <select id="select-choice-a" data-native-menu="false" name="select-choice-a" tabindex="-1" data-mini="true">
                            <option>Estaciones Meteorológicas</option> 
                        <!-- <option value="1">Estación 1</option> -->
                             </select>
+                                
+                             </div>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Frutales:</legend>
+                                    <input type="radio" name="frutal" id="radio-choice-c" value="0" checked="checked" style="alignment-adjust:central" />
+                                    <label for="radio-choice-c">Manzano</label>
+                                    <input type="radio" name="frutal" id="radio-choice-d" value="1" />
+                                    <label for="radio-choice-d">Peral</label>
+                                    <input type="radio" name="frutal" id="radio-choice-b" value="2" />
+                                    <label for="radio-choice-b">F. de Carozo</label>
+                        </fieldset>
+                    </div> 
+                    <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
+                            <label class="select ui-select" for="epoca">Estado del Cultivo:</label>
+                            <div class="ui-select">
+
+                            <select id="epoca" data-native-menu="false" name="epoca" tabindex="-1"  data-mini="true">
+                         <!--  <option>Estaciones Meteorológicas</option> -->
+                             <option value="0">Comienzo de temporada</option>
+                             <option value="1">Mediados de temporada</option>
+                             <option value="2">Cerca de la cosecha</option>
+                             <option value="3">Después de la cosecha</option>
+                            </select>
                             </div>
-                            </div>
-                       <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
+                    </div>    
+                    <div data-role="fieldcontain">
+                            <label for="cobertura">Porcentaje de cobertura:</label>
+                            <input type="range" name="cobertura" id="cobertura" value="50" min="0" max="100" step=10 data-highlight="true"  />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Tipo de Riego:</legend>
+
+                                    <input type="radio" name="tipoRiego" id="goteo" value="0.9" checked="checked" />
+                                    <label for="goteo">Por goteo</label>
+                                    <input type="radio" name="tipoRiego" id="micro" value="0.8" />
+                                    <label for="micro">Por Microaspersión</label>                                    
+                        </fieldset>
+                    </div>                      <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
                   </form>
                     <div id="resul"></div>
                     <div id="menu">
-                         <a data-icon="flat-checkround" data-theme="f" href="#second-page" data-role="button" onclick="seleccion()" >Calculadora de Riego</a>
-                   <!--     <a data-icon="flat-time" data-theme="f" href="#due-page"  data-role="button">Fake Btn</a>  -->
-                  <!--  <fieldset class="ui-grid-a">
-                            <div class="ui-block-a"> <a data-icon="flat-checkround" data-theme="e" href="#tips-page"  data-role="button">Fake Btn</a></div>
-                            <div class="ui-block-b"><a data-icon="ms-question" data-theme="g" href="#about-page"  data-role="button" >About</a></div>
-                        </fieldset>
-                  -->
+                         <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="seleccion()" >Calculadora de Riego</a>
+                   
 
                     </div>
               </div>
-             <div data-role="footer">
-                    <h4>pie de página</h4>
+             
+            <div data-role="footer">
+            		<a href="#third-page" data-icon="info" data-theme="b" data-role="button" data-mini="true" data-inline="true" onclick="verDatosEMA();">Datos EMA</a>
+                    <a href="#acerca" data-icon="check" data-theme="b" data-role="button" data-mini="true" data-inline="true" class="ui-btn-right">Acerca de</a>
                 </div>   
             </div><!-- /page  -->
+<!-- ---------------------------------------------------------------------------------------------------   -->            
             <!-- /Segunda pagina  -->
-            <div data-role="page" id="second-page" data-title="This is the second page">
+            <div data-role="page" id="second-page" data-title="Necesidad de Riego">
                 <div data-role="header">
-                    <h1>Second page</h1>
+                	<a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
+                    <h3>Necesidad de Riego</h3>
                 </div>
                 <div data-role="content" id="main">
-                    <p>Contenidode la segunda pagina</p>
-                    <p>Volver a la pagina inicial, <a href="#home-page">Vuelta</a>
-                    <div id="resultados"> Prueba </div>
-                    <div id="datosMeteo"> Prueba </div>
+                    <span id="estacionAuto">1</span>
+                    <span id="tipoFrutal">2</span>
+                    <span id="estadoCultivo">3</span>
+                    <span id="porcentajeCob">4</span>
+                    <span id="tipoRiego">5</span>
+                    <div id="resulta2">  </div>
                 </div>
                 <div data-role="footer">
                     <h4>pie de segunda pagina</h4>
                 </div>
+            </div>
+<!-- ---------------------------------------------------------------------------------------------------   -->                        
+            <!-- /tercer pagina  -->
+            <div data-role="page" id="third-page" data-title="Datos de la EMA">
+                <div data-role="header">
+                    <a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
+                    <h1>Datos de la EMA</h1>
                 </div>
-
-           
+                <div data-role="content" id="datosMeteo">
+                <div id="ema"></div>
+                    <div id="resultados">  </div>
+                </div>
+                
+            </div>
+<!-- ---------------------------------------------------------------------------------------------------   -->                        
+            <div data-role="page" id="acerca" data-title="Grupo de desarrollo">
+                <div data-role="header">
+                    <a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
+                    <h1>Acerca de CuentaGOTAS</h1>
+                </div>
+                <div data-role="content" id="main">
+                <div 
+                id="somos">
+                    <h3>Diseño y programación:</h3>
+                    <p> - TSAW. Lorena Gonzalez</p>
+                    <p> - TSAW. Daniel Toth</p>
+                    <h3>Tutor:</h3>
+                    <p> - Lic. Pablo Kogan</p></div>
+                    <div id="logos">
+                    <div align="left" class="logo_unco" id="logo_unco" width="80" height="80"><img src="images/uncesp.jpg" width="80" height="80" alt="Uncomahue"></div><div id="logo_fai"><img src="images/fai.jpg" width="80" height="80" alt="Fai"></div>
+                    <div id="logo_inta"><img src="images/logo_inta.png" width="90" height="78" alt=""/></div>
+                   
+                       
+                     </div>   
+                </div>
+            </div>
+  <!-- ---------------------------------------------------------------------------------------------------   -->                     
         </div>
-        <script type="text/javascript" src="libs/fastclick.min.js"></script>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="libs/jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="libs/jQueryMobile/jquery.mobile-1.3.2.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+
         <script type="text/javascript">
             app.initialize();
         </script>

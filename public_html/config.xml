@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.CuentaGOTAS" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Cuentagotas</name>
+    <name>CuentaGOTAS</name>
     <description>
-        Primer prueba de acceso a el dato del archivo de la estacion.
+        Calculadora de riego del INTA Alto Valle - Cooperación Facultad de Informática - UNComahue
     </description>
     <author email="cuentagotas@gmail.com" href="">
-        Cuentagotas Team
+        Lorena Gonzalez - Daniel Toth
     </author>
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
@@ -41,20 +41,21 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
     <icon src="icon.png" />
-    <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/cuentagotas_32.png" />
-    <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/cuentagotas_48.png" />
-    <icon gap:platform="android" gap:qualifier="hdpi" src="res/icon/android/cuentagotas_96.png" />
-    <icon gap:platform="android" gap:qualifier="xhdpi" src="res/icon/android/cuentagotas_96.png" />
-    <icon gap:platform="blackberry" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="blackberry" gap:state="hover" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="res/icon/ios/icon-72.png" width="72" />
+    <icon gap:platform="android" gap:qualifier="ldpi" src="images/cuentagotas_32.png" />
+    <icon gap:platform="android" gap:qualifier="mdpi" src="images/cuentagotas_48.png" />
+    <icon gap:platform="android" gap:qualifier="hdpi" src="images/cuentagotas_96.png" />
+    <icon gap:platform="android" gap:qualifier="xhdpi" src="images/cuentagotas_96.png" />
+    <icon gap:platform="blackberry" src="images/icon-80.png" />
+    <icon gap:platform="blackberry" gap:state="hover" src="images/cuentagotas_96.png" />
+    <icon gap:platform="ios" height="57" src="images/cuentagotas_96.png" width="57" />
+    <icon gap:platform="ios" height="72" src="images/cuentagotas_96.png" width="72" />
     <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
     <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
-    <icon gap:platform="webos" src="res/icon/webos/icon-64.png" />
-    <icon gap:platform="winphone" src="res/icon/windows-phone/icon-48.png" />
-    <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173.png" />
+    <icon gap:platform="webos" src="images/cuentagotas_96.png" />
+    <icon gap:platform="winphone" src="images/cuentagotas_96.png" />
+    <icon gap:platform="winphone" gap:role="background" src="images/cuentagotas_96.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="res/screen/android/screen-ldpi-portrait.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="res/screen/android/screen-mdpi-portrait.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="res/screen/android/screen-hdpi-portrait.png" />
@@ -66,5 +67,8 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
+    <feature id="blackberry.app"          required="true" version="1.0.0.0" />
+    <feature id="blackberry.app.event"    required="true" version="1.0.0.0" />
+    <feature id="blackberry.system.event" required="true" version="1.0.0.0" />
     <access origin="*" />
 </widget>

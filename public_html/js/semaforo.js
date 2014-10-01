@@ -14,7 +14,7 @@ var mes;
 var anio;
 var ho;
 var mi;
-
+var mediaEva;
 
 
 function llamar(url) {
@@ -75,39 +75,62 @@ function buscardatosHistoricos(ema) {
 
 function comparaFecha(dd,mm,aa,hh,min){
     var fechaActual = new Date(); 
-    alert(aa+'/'+mm+'/'+dd+'  '+hh+':'+min);
-    var fechaFin = new Date(2000+aa,mm,dd,hh,min);
+    var diferencia=new Date();
+    aa=aa+2000;
+    mm=mm-1;
+    var fechaFin = new Date(aa,mm,dd,hh,min);
    // var fechaFin = mm + "/" + dd + "/" + aa;
-    var diferencia=fechaActual-fechaFin;
-    var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+diferencia;
-    alert (texto);
-    if(diferencia<3){ 
-                  return true; 
-                  alert("paso >3");
-         } else { alert("La EMA esta Fuera de Servicio");
+    var diferencia= fechaActual.getTime() - fechaFin.getTime();
+    var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )); 
+    var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
+    //alert (texto);
+    if(difHoras<3){ 
+                  //alert("paso >3");
+                  return true;                 
+         } else { alert("La Estación Meteorológica Automática esta Fuera de Servicio");
                  return false;}
       }
     
 
 
-function publicarDatosEMA(){
-        document.getElementById('datosMeteo').style.display = 'block';
-        document.getElementById('datosMeteo').innerHTML = 'Hora: '+hora+'<br>T: ' + temperatura +
-            'ºC <br/>H: ' + humedad + '%<br/>V: ' + viento + 'km/h<br/>pp: ' + lluvia + 'mm';
-
+function publicarDatosEMA(emaSeleccionada){
+	document.getElementById('ema').innerHTML = ema[emaSeleccionada][0]
+        document.getElementById('resultados').style.display = 'block';
+        document.getElementById('resultados').innerHTML = 'Hora: '+hora+'<br>Temp.: ' + temperatura +
+            'ºC <br/>Humed: ' + humedad + '%<br/>Viento: ' + viento + 'km/h<br/> Lluvia: ' + lluvia + 'mm<br/>Media Evap:'+mediaEva;
     return true;  
+}
+function mediaEvapo24hs(filas,nroFilas){
+  //  alert("NroFila:"+nroFilas);
+   if (nroFilas>144){
+       var media=0;
+       var inicio=nroFilas-144+1;
+       //alert ("Inicio="+inicio);
+       for (var j=inicio;j<(nroFilas+1);j++){
+           ultima=parserHistoricolinea(filas, j);
+           //if (j==inicio){alert("Inicio:"+ultima[0]+"  "+ultima[1])}
+           //if (j==nroFilas){alert("Final:"+ultima[0]+"  "+ultima[1])}
+           media=parseFloat(media+parseFloat(ultima[6]));
+           
+         //  alert("i:"+j+" Ult="+ultima[6]+"\n media:"+media);
+       }
+       
+       media=media/144;
+       var cant=j-inicio;
+       //alert("j:"+cant+"  media:"+media);
+       return media;
+   } 
 }
 
 
-function parserHistoricolinea(filas, numero) {
+function parserHistoricolinea(filas, numero) { //Rotorna la linea parseada en un arreglo
     ultimaconblancos = filas[numero].split(' ');
     //console.log(ultimaconblancos);
     //console.log(ultimaconblancos.length);
     ultima = new Array();
     for (i = 0; i < ultimaconblancos.length; i++) {
         //console.log(ultimaconblancos[i]);
-        if (ultimaconblancos[i] != '') {
-
+        if (ultimaconblancos[i] !=='') {
             ultima.push(ultimaconblancos[i]);
         }
     }
@@ -119,11 +142,14 @@ function parserHistorico(contenido) {
     filas = contenido.split('\n');
     //console.log(filas);
     //console.log(filas.length);
+    
+   // alert("long:"+filas.length);
     if(filas.length<25){
         return true;
     }
-    numerofila = filas.length - 2
-    ultima = parserHistoricolinea(filas, numerofila)
+    numerofila = filas.length - 2;
+    ultima = parserHistoricolinea(filas, numerofila);
+    mediaEva=mediaEvapo24hs(filas,numerofila);
     fecha=ultima[0];
     dia=parseInt(fecha.substr(0, 2),10);
     mes=parseInt(fecha.substr(3, 2),10);
