@@ -44,6 +44,7 @@
         </script>
         <script>
          function seleccion(){
+               // obtiene los datos seleccionados
                 var e = document.getElementById("select-choice-a");
                 var emaSeleccionada = e.options[e.selectedIndex].value;
                 var tipoCultivo=getRadioValue('frutal');
@@ -52,11 +53,14 @@
                 var PC=document.getElementById("cobertura").value;
                 
                 if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
+                //imprime los valores elegidos
                 document.getElementById('estacionAuto').innerHTML = ema[emaSeleccionada][0];
                 document.getElementById('tipoFrutal').innerHTML = culti[tipoCultivo];
                 document.getElementById('estadoCultivo').innerHTML =  epoc[epoca];
                 document.getElementById('porcentajeCob').innerHTML =kr[PC] ; 
                 document.getElementById('tipoRiego').innerHTML = triego[tipoRiego];
+                // adquiere los datos de la EMA seleccionada
+                //  
                 buscardatosHistoricos(ema[emaSeleccionada][4]);
                 
             }

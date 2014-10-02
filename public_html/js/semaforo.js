@@ -65,8 +65,10 @@ function parser(contenido) {
 
 function buscardatosHistoricos(ema) {
     //http://anterior.inta.gov.ar/altovalle/met/downld02.txt
-    //parserHistorico(llamar('http://anterior.inta.gov.ar/altovalle/met/downld02.txt'));
+    //parseHistorico(llamar('http://anterior.inta.gov.ar/altovalle/met/downld02.txt'));
     parserHistorico(llamar(ema));
+    var texto="d="+dia+" m="+mes+" a="+anio+" h="+ho+" mi="+mi;
+   //S alert(texto);
     comparaFecha(dia,mes,anio,ho,mi);
     
 
@@ -83,7 +85,7 @@ function comparaFecha(dd,mm,aa,hh,min){
     var diferencia= fechaActual.getTime() - fechaFin.getTime();
     var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )); 
     var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
-    //alert (texto);
+   // alert (texto);
     if(difHoras<3){ 
                   //alert("paso >3");
                   return true;                 
@@ -116,7 +118,6 @@ function mediaEvapo24hs(filas,nroFilas){
        }
        
        media=media/144;
-       var cant=j-inicio;
        //alert("j:"+cant+"  media:"+media);
        return media;
    } 
@@ -151,9 +152,16 @@ function parserHistorico(contenido) {
     ultima = parserHistoricolinea(filas, numerofila);
     mediaEva=mediaEvapo24hs(filas,numerofila);
     fecha=ultima[0];
-    dia=parseInt(fecha.substr(0, 2),10);
-    mes=parseInt(fecha.substr(3, 2),10);
-    anio=parseInt(fecha.substr(6, 2),10);
+    if (fecha.length===7){ 
+                dia=parseInt(fecha.substr(0, 1),10);
+                mes=parseInt(fecha.substr(2, 2),10);
+                anio=parseInt(fecha.substr(5, 2),10);
+       } else {
+                dia=parseInt(fecha.substr(0, 2),10);
+                mes=parseInt(fecha.substr(3, 2),10);
+                anio=parseInt(fecha.substr(6, 2),10);
+       } 
+   // alert("d="+dia+" m="+mes+" ano="+anio);
     hora=ultima[1];
     ho=parseInt(hora.substr(0, 2),10);
     mi=parseInt(hora.substr(3, 2),10);
