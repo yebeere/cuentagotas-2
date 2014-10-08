@@ -92,18 +92,18 @@ for (var i = 0; i < 7; i++) {
     kr[1]=0.80;
     
     var epan= new Array(12);
-    epan['01']=10.1;
-    epan['02']=9.3;
-    epan['03']=6.4;
-    epan['04']=4.3;
-    epan['05']=0;
-    epan['06']=0;
-    epan['07']=0;
-    epan['08']=0;    
-    epan['09']=4.7;
-    epan['10']=6.6;
-    epan['11']=8.6;
-    epan['12']=9.9;
+    epan[0]=10.1;
+    epan[1]=9.3;
+    epan[2]=6.4;
+    epan[3]=4.3;
+    epan[4]=0;
+    epan[5]=0;
+    epan[6]=0;
+    epan[7]=0;    
+    epan[8]=4.7;
+    epan[9]=6.6;
+    epan[10]=8.6;
+    epan[11]=9.9;
 
     var culti= new Array(3);
     culti[0]='Manzanos';
@@ -120,6 +120,8 @@ for (var i = 0; i < 7; i++) {
     epoc[2]='Cerca de la cosecha';
     epoc[3]='Después de la cosecha';
     
+    var hayRed=false ;
+    var hayGPS=false ;
     
 function distance(lat1,lon1,lat2,lon2) {
 	var R = 6371; // km (change this constant to get miles)
@@ -156,44 +158,31 @@ function ordenGPS(position){
     
 
   var onSuccessGPS = function(position) {
-               //   var distancia=distance(ema[1][1],ema[1][2],position.coords.latitude,position.coords.longitude)
-//                    alert('Latitude: ' + position.coords.latitude + '\n' +
-//                    'Longitude: ' + position.coords.longitude + '\n'+
-//                    'Distancia: '+distancia+' km \n') ;
+                    hayGPS=true;
                     document.getElementById('gps').className = 'estado ok';
                     for (var i = 0; i < 7; i++) {
-                        // ema[i][5] = distance(ema[i][1],ema[i][2],-38.57,-68.36);
                         ema[i][5] = distance(ema[i][1],ema[i][2],position.coords.latitude,position.coords.longitude);
                     }
                     ema.sort(function(a,b) {
                                         return a[5]- b[5];
                             });
-                  // document.getElementById('estaciones').innerHTML = ema;  
-                  // document.getElementById('resul').innerHTML = 'lat:'+position.coords.latitude+'<br/>Long:'+position.coords.longitude;
                   
-                   for (var i = 0; i < 7; i++) { 
-                       var j=i;
-                      $("<option value='"+j+"'>"+ema[i][0]+"(Dist:"+Math.round(ema[i][5]) +" km) </option>").appendTo("#select-choice-a");
+                    for (var i = 0; i < 7; i++) { 
+                       //var j=i;
+                      $("<option value='"+i+"'>"+ema[i][0]+"(Dist:"+Math.round(ema[i][5]) +" km) </option>").appendTo("#select-choice-a");
                       var myselect = $("#select-choice-a");
                       myselect.selectmenu('refresh');
                     }
                    $("#select-choice-a option[value=0]").attr("selected",true);
                    var myselect = $("#select-choice-a");
                    myselect.selectmenu('refresh');
-
-//                    select = document.getElementById('select-choice-a');
-//                    for (var i = 0; i<=7; i++){
-//                        var opt = document.createElement('option');
-//                        opt.value = i+2;
-//                        opt.innerHTML = ema[i][0];
-//                        select.appendChild(opt);
-//                    }
-
-
     }
-            // onError Callback receives a PositionError object
-            //
+
+
+
+
     function onErrorGPS(error) {
+                         hayGPS=false;
 //                        alert('code: ' + error.code + '\n' +
 //                        'message: ' + error.message + '\n');
                          document.getElementById('gps').className = 'estado no';

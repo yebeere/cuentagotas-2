@@ -1,0 +1,125 @@
+/* 
+    Document   : cuentagotas
+    Created on : 06-oct-2014, 18:28:15
+    Author     : Daniel
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.weather-info-value   {
+	color: #080CC7;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 800;
+	font-size: 20px;
+	position: relative;
+	float: left;
+	text-align: center;
+	padding-left: 18px;
+}
+.weather-temperature {
+	font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 45px;
+	color: #070000;
+	text-align: center;
+}
+.weather-info-type {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	text-align: center;
+	font-size: 14px;
+	position: static;
+	float: left;
+	clear: both;
+	padding-left: 20px;
+}
+.col-xs-4 {
+
+
+}
+.weather-humidity {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	left: 10%;
+	background-color: #52C3D5;
+	border-width: thin;
+	border-color: #08EFEB;
+}
+.weather-wind {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-rain {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-pressure {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-evap {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-content {
+	display: block;
+	text-align: center;
+	width: 250px;
+	background-color: #ABE2EB;
+	left: 12%;
+	position: relative;
+	background-origin: content-box;
+	background-repeat: repeat;
+}
+.weather-content .date {
+	font-size: small;
+}
+.weather-content .hour {
+	font-size: small;
+}
+.weather-content .weather-information-mas {
+	width: 250px;
+	background-color: #ABE2EB;
+}
+.weather-humidity .weather-info-type {
+
+
+}
+.col-xs-4 .weather-wind .weather-info-type {
+	text-align: center;
+}
+.weather-content .fechahora {
+	background-color: #52C3D5;
+}
+.weather-content .emas h2 {
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+	color: #020122;
+	font-weight: 500;
+	text-shadow: 2px 2px #CED7F8;
+	vertical-align: middle;
+}
+.weather-content .emas {
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

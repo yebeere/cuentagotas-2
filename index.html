@@ -13,78 +13,22 @@
         
         <script type="text/javascript" charset="utf-8" src="phonegap.js"></script> 
         <link href="css/sistemas.css" rel="stylesheet" type="text/css"/>
+        <link href="css/cuentagotas.css" rel="stylesheet" type="text/css"/>
         <script src="js/semaforo.js" type="text/javascript"></script>
         <script src="js/geo.js" type="text/javascript"></script>
+        <script src="js/cuentagotas.js" type="text/javascript"></script>
         <script type="text/javascript">
+            
+                // consultamos si exite conexion a la red
                 document.addEventListener("deviceready", onDeviceReady, false);
                 function onDeviceReady() {
-                   // Register the event listener
-                   window.plugins.insomnia.keepAwake();
-                   document.addEventListener("offline", isOffline(), false);
-                   document.addEventListener("online", isOnline(), false);
+                   window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
+                   document.addEventListener("offline", isOffline(), false); //Fuera de red
+                   document.addEventListener("online", isOnline(), false);   //En red
                    //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
                     //buscardatosHistoricos();
                   }
-                   // Handle the online event
-                   //
-               function isOffline() {
-                     //  alert ('Su dispositivo móvil esta fuera de línea');
-                       document.getElementById('net').className = 'estado no';
-                   }
-               function isOnline() {
-                   //    alert ('Su dispositivo móvil esta en línea');
-                       document.getElementById('net').className = 'estado ok';
-                       var options = {maximumAge: 3000, timeout: 10000, enableHighAccuracy:true};
-                       navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS, options);
-                      // buscardatosHistoricos();
-                   }
-               function resultado(){
-                   document.getElementById('resul').innerHTML = document.getElementById('esta').selectedIndex;
-               }    
-        </script>
-        <script>
-         function seleccion(){
-               // obtiene los datos seleccionados
-                var e = document.getElementById("select-choice-a");
-                var emaSeleccionada = e.options[e.selectedIndex].value;
-                var tipoCultivo=getRadioValue('frutal');
-                var tipoRiego=getRadioValue('tipoRiego');
-                var epoca = document.getElementById("epoca").options[document.getElementById("epoca").selectedIndex].value;
-                var PC=document.getElementById("cobertura").value;
-                
-                if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
-                //imprime los valores elegidos
-                document.getElementById('estacionAuto').innerHTML = ema[emaSeleccionada][0];
-                document.getElementById('tipoFrutal').innerHTML = culti[tipoCultivo];
-                document.getElementById('estadoCultivo').innerHTML =  epoc[epoca];
-                document.getElementById('porcentajeCob').innerHTML =kr[PC] ; 
-                document.getElementById('tipoRiego').innerHTML = triego[tipoRiego];
-                // adquiere los datos de la EMA seleccionada
-                //  
-                buscardatosHistoricos(ema[emaSeleccionada][4]);
-                
-            }
-          function verDatosEMA(){
-                var e = document.getElementById("select-choice-a");
-                var emaSeleccionada = e.options[e.selectedIndex].value;
-                if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
-                buscardatosHistoricos(ema[emaSeleccionada][4]);
-                publicarDatosEMA(emaSeleccionada);
-          }  
-            function getRadioValue(groupName) {
-                var _result;
-                try {
-                    var o_radio_group = document.getElementsByName(groupName);
-                    for (var a = 0; a < o_radio_group.length; a++) {
-                        if (o_radio_group[a].checked) {
-                            _result = o_radio_group[a].value;
-                            break;
-                        }
-                    }
-                } catch (e) { }
-                return _result;
-            }
-            
+              
         </script>
         
         <title>CuentaGOTAS</title>
@@ -216,8 +160,54 @@
                     <h1>Datos de la EMA</h1>
                 </div>
                 <div data-role="content" id="datosMeteo">
-                <div id="ema"></div>
-                    <div id="resultados">  </div>
+                    <!--    <div id="ema"></div>
+                        <div id="resultados">  </div>-->
+                    
+                    <!--   Datos de estacion meteorologicca -->
+                    <div class="weather-content">
+                        <div class="emas" id="emas"><h2 id="ema"></h2></div>
+                        <div class="fechahora">
+                             <span class="date" id="date"></span>
+                         <span class="hour" id="hour"></span>
+                        </div>
+                        <div class="weather-information">
+
+                                 <div class="weather-temperature" id="temperatura"></div>
+
+                         </div>
+                         <div class="weather-information-mas">
+                                     <div class="col-xs-4">
+                                             <div class="weather-humidity">
+                                                     <span class="weather-info-value" id="humedad"></span>
+                                                     <span class="weather-info-type"><span>Humedad</span></span>
+                                             </div>
+                                     </div>
+                                     <div class="col-xs-4">
+                                             <div class="weather-pressure">
+                                                     <span class="weather-info-value" id="presion"></span>
+                                                     <span class="weather-info-type">Presión</span>
+                                             </div>
+                                     </div>
+                             <div class="col-xs-4">
+                                    <div class="weather-wind"><span class="weather-info-value" id="viento"></span> <span class="weather-info-type">Viento</span></div>
+                             </div>
+                             <div class="col-xs-4">
+                                             <div class="weather-rain">
+                                                     <span class="weather-info-value" id="lluvia"></span>
+                                                     <span class="weather-info-type">Lluvia</span>
+                                             </div>
+                             </div>
+                             <div class="col-xs-4">
+                                             <div class="weather-evap">
+                                                     <span class="weather-info-value" id="evaporacion"></span>
+                                                     <span class="weather-info-type">Evap.</span>
+                                             </div>
+                             </div>
+                         </div>
+                     </div>
+                    
+                    
+                    
                 </div>
                 
             </div>

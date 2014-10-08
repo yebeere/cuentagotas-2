@@ -6,6 +6,7 @@
 var humedad;
 var temperatura;
 var viento;
+var presion;
 var lluvia;
 var fecha;
 var hora;
@@ -67,7 +68,7 @@ function buscardatosHistoricos(ema) {
     //http://anterior.inta.gov.ar/altovalle/met/downld02.txt
     //parseHistorico(llamar('http://anterior.inta.gov.ar/altovalle/met/downld02.txt'));
     parserHistorico(llamar(ema));
-    var texto="d="+dia+" m="+mes+" a="+anio+" h="+ho+" mi="+mi;
+    //var texto="d="+dia+" m="+mes+" a="+anio+" h="+ho+" mi="+mi;
    //S alert(texto);
     comparaFecha(dia,mes,anio,ho,mi);
     
@@ -86,22 +87,14 @@ function comparaFecha(dd,mm,aa,hh,min){
     var difHoras = Math.floor(diferencia / (1000 * 60 * 60 )); 
     var texto="FA:"+fechaActual+'\nFF:'+fechaFin+'\nDif:'+difHoras;
    // alert (texto);
-    if(difHoras<3){ 
+    if(difHoras<4){ 
                   //alert("paso >3");
                   return true;                 
          } else { alert("La Estación Meteorológica Automática esta Fuera de Servicio");
                  return false;}
       }
-    
 
 
-function publicarDatosEMA(emaSeleccionada){
-	document.getElementById('ema').innerHTML = ema[emaSeleccionada][0]
-        document.getElementById('resultados').style.display = 'block';
-        document.getElementById('resultados').innerHTML = 'Hora: '+hora+'<br>Temp.: ' + temperatura +
-            'ºC <br/>Humed: ' + humedad + '%<br/>Viento: ' + viento + 'km/h<br/> Lluvia: ' + lluvia + 'mm<br/>Media Evap:'+mediaEva;
-    return true;  
-}
 function mediaEvapo24hs(filas,nroFilas){
   //  alert("NroFila:"+nroFilas);
    if (nroFilas>144){
@@ -168,8 +161,8 @@ function parserHistorico(contenido) {
     temperatura = parseFloat(ultima[2]);
     humedad = parseFloat(ultima[5]);
     viento = parseFloat(ultima[10]);
+    presion = parseFloat(ultima[16]);
     lluvia = parseFloat(ultima[17])*100;
-
     for (j = 1; j < 18; j++) {
         ultima = parserHistoricolinea(filas, numerofila - j);
         //console.log(ultima[17]);
