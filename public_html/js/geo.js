@@ -122,6 +122,7 @@ for (var i = 0; i < 7; i++) {
     
     var hayRed=false ;
     var hayGPS=false ;
+    var emaFS;
     
 function distance(lat1,lon1,lat2,lon2) {
 	var R = 6371; // km (change this constant to get miles)

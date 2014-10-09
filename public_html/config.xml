@@ -42,6 +42,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
+    <gap:plugin name="nl.x-services.plugins.toast" version="1.0" /> 
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="images/cuentagotas_32.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="images/cuentagotas_48.png" />

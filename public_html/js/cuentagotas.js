@@ -50,17 +50,17 @@
                 document.getElementById('tipoRiego').innerHTML = triego[tipoRiego];
                 // adquiere los datos de la EMA seleccionada
                 // 
-                if (hayRed){ // si hay red busca losdatos en los archivos de las EMA
+                if (hayRed && !emaFS){ // si hay red busca losdatos en los archivos de las EMA
                              document.getElementById('estacionAuto').innerHTML = ema[emaSeleccionada][0];
                              buscardatosHistoricos(ema[emaSeleccionada][4]);     //obtiene los ultimos datos y mediaEva
                              ;
                     } else{
                                document.getElementById('estacionAuto').innerHTML = "No hay red - Se utilizan valores típicos";
                                //si no hay red calcular los datos de EPAN con las tablas
-                               alert("No hay red - Se utilizan valores estándar") ;
+                                window.plugins.toast.showLongTop("Se utilizan valores estándar - Cambie de Estación Meteorológica") ;
                                var fechaActual = new Date();
                                var mes=fechaActual.getMonth();
-                               mediaEva=epan[mes]*0.7;
+                               mediaEva=epan[mes]*0.7;// 0.7 coeficiente del tanque Kp
                       }
                 
                 
@@ -74,7 +74,7 @@
           }  
           
           function publicarDatosEMA(emaSeleccionada){
-                if (hayRed) {
+                if (hayRed && !emaFS) {
                  document.getElementById('ema').innerHTML = ema[emaSeleccionada][0];
                  document.getElementById('date').innerHTML = fecha;
                  document.getElementById('hour').innerHTML = hora;
@@ -85,15 +85,15 @@
                  document.getElementById('lluvia').innerHTML = lluvia+" mm";
                  document.getElementById('evaporacion').innerHTML = mediaEva;
                 } else {
-                     document.getElementById('ema').innerHTML = "No hay RED";
-                     document.getElementById('date').innerHTML = " ";
-                     document.getElementById('hour').innerHTML = " ";
-                     document.getElementById('temperatura').innerHTML = "s/dato ºC";
-                     document.getElementById('humedad').innerHTML = "s/dato %"; 
-                     document.getElementById('presion').innerHTML ="s/dato hPa";
-                     document.getElementById('viento').innerHTML = "s/dato km/h";
-                     document.getElementById('lluvia').innerHTML = "s/dato mm";
-                     document.getElementById('evaporacion').innerHTML = mediaEva;
+                     document.getElementById('ema').innerHTML = ema[emaSeleccionada][0];
+                     document.getElementById('date').innerHTML = "&nbsp";
+                     document.getElementById('hour').innerHTML = "&nbsp";
+                     document.getElementById('temperatura').innerHTML = "s/dato";
+                     document.getElementById('humedad').innerHTML = "s/dato"; 
+                     document.getElementById('presion').innerHTML ="s/dato";
+                     document.getElementById('viento').innerHTML = "s/dato";
+                     document.getElementById('lluvia').innerHTML = "s/dato";
+                     document.getElementById('evaporacion').innerHTML = "s/dato";
                 } 
                  //document.getElementById('resultados').style.display = 'block';
                //  document.getElementById('resultados').innerHTML = 'Hora: '+hora+'<br>Temp.: ' + temperatura +
