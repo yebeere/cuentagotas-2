@@ -27,15 +27,26 @@
                    document.addEventListener("online", isOnline(), false);   //En red
                    //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
                     //buscardatosHistoricos();
+                   document.addEventListener("backbutton", function(e){
+                            if($.mobile.activePage.is('#homepage')){
+                                e.preventDefault();
+                               window.plugins.toast.showLongCenter("Gracias por utilizar CuentaGOTAS!!");
+                                navigator.app.exitApp();
+                            }
+                            else {
+                                navigator.app.backHistory()
+                            }
+                        }, false);
+
                   }
               
         </script>
-        
+
         <title>CuentaGOTAS</title>
     </head>
     <body>
         <div id="app">
-            <div id="home-page" data-role="page" >
+            <div id="homepage" data-role="page" >
                 <div data-role="header">
                         <h1>CuentaGOTAS</h1>
                 </div>
@@ -137,16 +148,59 @@
             <!-- /Segunda pagina  -->
             <div data-role="page" id="second-page" data-title="Necesidad de Riego">
                 <div data-role="header">
-                	<a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
-                    <h3>Necesidad de Riego</h3>
+                	<a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
+                    <h3>Riego</h3>
                 </div>
-                <div data-role="content" id="main">
-                    <span id="estacionAuto">1</span>
+                <div data-role="content" id="riego">
+               <!--     <span id="estacionAuto">1</span>
                     <span id="tipoFrutal">2</span>
                     <span id="estadoCultivo">3</span>
                     <span id="porcentajeCob">4</span>
                     <span id="tipoRiego">5</span>
                     <div id="resulta2">  </div>
+                 -->   
+                    
+                     <div class="fluid tabla"><table width="250" border="0" cellspacing="2" cellpadding="1">
+                        <tbody>
+                          <tr>
+                            <td class="impar">Estación Meteorológica</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="estacionAuto">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Tipo de frutal</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="tipoFrutal">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Epoca del cultivo</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="estadoCultivo">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Coeficiente de Cobertura</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="porcentajeCob">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Tipo de riego</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="tipoRiego">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Nr = Epan* Kp * Kr * MP / EP</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="nr">&nbsp</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
                 </div>
                 <div data-role="footer">
                     <h4>pie de segunda pagina</h4>
@@ -156,7 +210,7 @@
             <!-- /tercer pagina  -->
             <div data-role="page" id="third-page" data-title="Datos de la EMA">
                 <div data-role="header">
-                    <a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
+                    <a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
                     <h1>Datos de la EMA</h1>
                 </div>
                 <div data-role="content" id="datosMeteo">
@@ -200,7 +254,7 @@
                              <div class="col-xs-4">
                                              <div class="weather-evap">
                                                      <span class="weather-info-value" id="evaporacion"></span>
-                                                     <span class="weather-info-type">Evap.</span>
+                                                     <span class="weather-info-type">Indice de Evaporación</span>
                                              </div>
                              </div>
                          </div>
@@ -214,7 +268,7 @@
 <!-- ---------------------------------------------------------------------------------------------------   -->                        
             <div data-role="page" id="acerca" data-title="Grupo de desarrollo">
                 <div data-role="header">
-                    <a href="#home-page" data-icon="back" data-theme="b">Inicio</a>
+                    <a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
                     <h1>Acerca de CuentaGOTAS</h1>
                 </div>
                 <div data-role="content" id="main">
